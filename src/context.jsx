@@ -11,12 +11,14 @@ import {
     DISPLAY_ITEMS,
 } from "./actions";
 
+import cartItems from "./data";
+
 // Creating the Context
 const AppContext = createContext();
 
 const initialState = {
     loading: false,
-    cart: [],
+    cart: new Map(cartItems.map((item) => [item.id, item])),
 };
 
 // Component
