@@ -9,6 +9,16 @@ import {
 
 // Reducer function
 const reducer = (state, action) => {
+    if (action.type === LOADING) {
+        return { ...state, loading: true };
+    }
+
+    if (action.type === DISPLAY_ITEMS) {
+        const newCart = new Map(
+            action.payload.cart.map((item) => [item.id, item])
+        );
+        return { ...state, loading: false, cart: newCart };
+    }
     if (action.type === CLEAR_CART) {
         return { ...state, cart: new Map() };
     }
