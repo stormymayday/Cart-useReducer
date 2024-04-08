@@ -1,12 +1,9 @@
 import { useContext, useReducer, useEffect, createContext } from "react";
 
+import reducer from "./reducer";
+
 // Creating the Context
 const AppContext = createContext();
-
-// Reducer function
-const reducer = (state, action) => {
-    return state;
-};
 
 const initialState = {
     loading: false,
