@@ -1,7 +1,7 @@
 "use client";
 
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
-import { CartItemType } from "@/types";
+import { CartItemType } from "@/utils/types";
 import Image from "next/image";
 
 interface CartItemProps {

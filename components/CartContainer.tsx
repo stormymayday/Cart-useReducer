@@ -1,10 +1,15 @@
 "use client";
 
 import CartItem from "@/components/CartItem";
-import { CartItemType } from "@/types";
-import cartItems from "@/data";
+import { CartItemType } from "@/utils/types";
+import cartItems from "@/utils/data";
+import { useAppContext } from "@/utils/context";
 
 const CartContainer = () => {
+    const { greeting } = useAppContext();
+
+    console.log(greeting);
+
     const cartArray: CartItemType[] = [...cartItems];
 
     if (cartArray.length === 0) {
