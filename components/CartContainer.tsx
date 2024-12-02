@@ -5,7 +5,7 @@ import { CartItemType } from "@/utils/types";
 import { useAppContext } from "@/utils/context";
 
 const CartContainer = () => {
-    const { state, clearCart } = useAppContext();
+    const { state, totalCost, clearCart } = useAppContext();
 
     // Converting Map into an Array
     const cartArray: CartItemType[] = [...Array.from(state.cart.values())];
@@ -38,7 +38,7 @@ const CartContainer = () => {
                 <hr />
                 <div>
                     <h5 className="cart-total">
-                        total <span>$10</span>
+                        total <span>${totalCost.toFixed(2)}</span>
                     </h5>
                 </div>
                 <button className="btn btn-hipster" onClick={clearCart}>

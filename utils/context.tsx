@@ -11,6 +11,7 @@ import {
     REMOVE,
 } from "@/utils/actions";
 import reducer from "@/utils/reducer";
+import getTotals from "./getTotals";
 
 import {
     createContext,
@@ -31,12 +32,16 @@ type AppContextType = {
     removeItem: (id: string) => void;
     increaseAmount: (id: string) => void;
     decreaseAmount: (id: string) => void;
+    totalNumberOfItems: number;
+    totalCost: number;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
+
+    const { totalNumberOfItems, totalCost } = getTotals(state.cart);
 
     const clearCart = () => {
         dispatch({ type: CLEAR_CART });
@@ -62,6 +67,8 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
                 removeItem,
                 increaseAmount,
                 decreaseAmount,
+                totalNumberOfItems,
+                totalCost,
             }}
         >
             {children}
