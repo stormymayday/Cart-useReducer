@@ -1,22 +1,21 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { AppStateType } from "./types";
 import cartItems from "@/utils/data";
 import {
     CLEAR_CART,
-    DECREASE,
-    DISPLAY_ITEMS,
-    INCREASE,
-    LOADING,
-    REMOVE,
+    // DECREASE,
+    // DISPLAY_ITEMS,
+    // INCREASE,
+    // LOADING,
+    // REMOVE,
 } from "@/utils/actions";
 import reducer from "@/utils/reducer";
 
 import {
     createContext,
     useContext,
-    useEffect,
+    // useEffect,
     ReactNode,
     useReducer,
 } from "react";
@@ -26,16 +25,33 @@ const initialState: AppStateType = {
     loading: false,
 };
 
-const AppContext = createContext(initialState);
+type AppContextType = {
+    state: AppStateType;
+    clearCart: () => void;
+};
+
+const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
+    const clearCart = () => {
+        dispatch({ type: CLEAR_CART });
+    };
+
+    return (
+        <AppContext.Provider value={{ state, clearCart }}>
+            {children}
+        </AppContext.Provider>
+    );
 };
 
 const useAppContext = () => {
-    return useContext(AppContext);
+    const context = useContext(AppContext);
+    if (!context) {
+        throw new Error("context is undefined");
+    }
+    return context;
 };
 
 export { AppContextProvider, useAppContext };

@@ -5,10 +5,10 @@ import { CartItemType } from "@/utils/types";
 import { useAppContext } from "@/utils/context";
 
 const CartContainer = () => {
-    const { cart } = useAppContext();
+    const { state, clearCart } = useAppContext();
 
     // Converting Map into an Array
-    const cartArray: CartItemType[] = [...Array.from(cart.values())];
+    const cartArray: CartItemType[] = [...Array.from(state.cart.values())];
 
     if (cartArray.length === 0) {
         return (
@@ -41,10 +41,7 @@ const CartContainer = () => {
                         total <span>$10</span>
                     </h5>
                 </div>
-                <button
-                    className="btn btn-hipster"
-                    onClick={() => console.log("clear cart")}
-                >
+                <button className="btn btn-hipster" onClick={clearCart}>
                     clear cart
                 </button>
             </footer>
