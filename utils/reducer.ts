@@ -1,10 +1,11 @@
-import { AppStateType } from "./types";
+import { AppStateType, CartItemType } from "./types";
 import {
     CLEAR_CART,
     DECREASE,
-    // DISPLAY_ITEMS,
+    DISPLAY_ITEMS,
     INCREASE,
-    // LOADING,
+    LOADING,
+    ERROR,
     REMOVE,
 } from "@/utils/actions";
 
@@ -66,6 +67,24 @@ const reducer = (state: AppStateType, action: any) => {
 
         // Spreading the state object and overwriting cart value
         return { ...state, cart: newCart };
+    }
+
+    if (action.type === LOADING) {
+        const isLoading = action.payload.loading;
+        return { ...state, loading: isLoading };
+    }
+
+    if (action.type === ERROR) {
+        const isError = action.payload.isError;
+        const errorMessage = action.payload.errorMessage;
+        return { ...state, isError: isError, errorMessage: errorMessage };
+    }
+
+    if (action.type === DISPLAY_ITEMS) {
+        const newCart = new Map(
+            action.payload.data.map((item: CartItemType) => [item.id, item])
+        );
+        return { ...state, cart: newCart, errorMessage: "hello" };
     }
 
     // return state;

@@ -3,4 +3,5 @@ export const REMOVE = "REMOVE";
 export const INCREASE = "INCREASE";
 export const DECREASE = "DECREASE";
 export const LOADING = "LOADING";
-export const DISPLAY_ITEMS = "CLEAR_CART";
+export const ERROR = "ERROR";
+export const DISPLAY_ITEMS = "DISPLAY_ITEMS";

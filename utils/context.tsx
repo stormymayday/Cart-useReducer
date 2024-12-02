@@ -1,13 +1,14 @@
 "use client";
 
 import { AppStateType } from "./types";
-import cartItems from "@/utils/data";
+import { fetchData } from "./fetchData";
 import {
     CLEAR_CART,
     DECREASE,
-    // DISPLAY_ITEMS,
+    DISPLAY_ITEMS,
     INCREASE,
-    // LOADING,
+    LOADING,
+    ERROR,
     REMOVE,
 } from "@/utils/actions";
 import reducer from "@/utils/reducer";
@@ -16,14 +17,16 @@ import getTotals from "./getTotals";
 import {
     createContext,
     useContext,
-    // useEffect,
+    useEffect,
     ReactNode,
     useReducer,
 } from "react";
 
 const initialState: AppStateType = {
-    cart: new Map(cartItems.map((item) => [item.id, item])),
+    cart: new Map(),
     loading: false,
+    isError: false,
+    errorMessage: "",
 };
 
 type AppContextType = {
@@ -39,6 +42,30 @@ type AppContextType = {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
+    const getData = async () => {
+        dispatch({ type: LOADING, payload: { loading: true } });
+
+        const { data, isError, errorMessage } = await fetchData(
+            process.env.NEXT_PUBLIC_API_URL || ""
+        );
+
+        dispatch({
+            type: DISPLAY_ITEMS,
+            payload: { data },
+        });
+
+        dispatch({
+            type: ERROR,
+            payload: { isError: isError, errorMessage: errorMessage },
+        });
+
+        dispatch({ type: LOADING, payload: { loading: false } });
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
+
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const { totalNumberOfItems, totalCost } = getTotals(state.cart);
