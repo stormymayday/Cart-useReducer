@@ -1,16 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { CartItemType, AppStateType } from "./types";
-
-// import cartItems from "@/utils/data";
+import { AppStateType } from "./types";
+import cartItems from "@/utils/data";
+import {
+    CLEAR_CART,
+    DECREASE,
+    DISPLAY_ITEMS,
+    INCREASE,
+    LOADING,
+    REMOVE,
+} from "@/utils/actions";
 import reducer from "@/utils/reducer";
 
 import {
     createContext,
     useContext,
-    // useReducer,
-    // useEffect,
+    useEffect,
     ReactNode,
     useReducer,
 } from "react";
@@ -23,7 +29,6 @@ const initialState: AppStateType = {
 const AppContext = createContext(initialState);
 
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [state, dispatch] = useReducer(reducer, initialState);
 
     return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
