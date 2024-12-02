@@ -6,9 +6,8 @@ import cartItems from "@/utils/data";
 import { useAppContext } from "@/utils/context";
 
 const CartContainer = () => {
-    const { greeting } = useAppContext();
-
-    console.log(greeting);
+    const { data } = useAppContext();
+    console.log(data);
 
     const cartArray: CartItemType[] = [...cartItems];
 

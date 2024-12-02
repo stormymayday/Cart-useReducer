@@ -5,3 +5,8 @@ export type CartItemType = {
     img: string;
     amount: number;
 };
+
+export type AppStateType = {
+    data: CartItemType[];
+    loading: boolean;
+};

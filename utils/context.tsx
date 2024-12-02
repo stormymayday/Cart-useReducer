@@ -1,27 +1,32 @@
 "use client";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { CartItemType, AppStateType } from "./types";
+
+// import cartItems from "@/utils/data";
+import reducer from "@/utils/reducer";
+
 import {
     createContext,
     useContext,
     // useReducer,
     // useEffect,
     ReactNode,
+    useReducer,
 } from "react";
 
-interface AppContextInterface {
-    greeting: string;
-}
+const initialState: AppStateType = {
+    data: [],
+    loading: false,
+};
 
-const AppContext = createContext<AppContextInterface>({ greeting: "" });
+const AppContext = createContext(initialState);
 
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
-    const greeting = "hello";
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [state, dispatch] = useReducer(reducer, initialState);
 
-    return (
-        <AppContext.Provider value={{ greeting }}>
-            {children}
-        </AppContext.Provider>
-    );
+    return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
 };
 
 const useAppContext = () => {
