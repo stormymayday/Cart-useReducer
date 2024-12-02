@@ -4,7 +4,7 @@ import { AppStateType } from "./types";
 import cartItems from "@/utils/data";
 import {
     CLEAR_CART,
-    // DECREASE,
+    DECREASE,
     // DISPLAY_ITEMS,
     INCREASE,
     // LOADING,
@@ -30,6 +30,7 @@ type AppContextType = {
     clearCart: () => void;
     removeItem: (id: string) => void;
     increaseAmount: (id: string) => void;
+    decreaseAmount: (id: string) => void;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -49,9 +50,19 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
         dispatch({ type: INCREASE, payload: { id } });
     };
 
+    const decreaseAmount = (id: string) => {
+        dispatch({ type: DECREASE, payload: { id } });
+    };
+
     return (
         <AppContext.Provider
-            value={{ state, clearCart, removeItem, increaseAmount }}
+            value={{
+                state,
+                clearCart,
+                removeItem,
+                increaseAmount,
+                decreaseAmount,
+            }}
         >
             {children}
         </AppContext.Provider>

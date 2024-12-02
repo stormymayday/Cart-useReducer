@@ -1,7 +1,7 @@
 import { AppStateType } from "./types";
 import {
     CLEAR_CART,
-    // DECREASE,
+    DECREASE,
     // DISPLAY_ITEMS,
     INCREASE,
     // LOADING,
@@ -37,6 +37,28 @@ const reducer = (state: AppStateType, action: any) => {
         if (item) {
             if (item.amount < MAX_ITEM_LIMIT) {
                 const newAmount = item.amount + 1;
+                const updatedItem = { ...item, amount: newAmount };
+                newCart.set(itemId, updatedItem);
+            }
+        }
+
+        // Spreading the state object and overwriting cart value
+        return { ...state, cart: newCart };
+    }
+
+    if (action.type === DECREASE) {
+        // Creating a new Map instance and passing current state value
+        const newCart = new Map(state.cart);
+
+        // Decreasing item amount
+        const itemId = action.payload.id;
+        const item = newCart.get(itemId);
+        if (item) {
+            if (item.amount === 1) {
+                // deleting the item
+                newCart.delete(itemId);
+            } else {
+                const newAmount = item.amount - 1;
                 const updatedItem = { ...item, amount: newAmount };
                 newCart.set(itemId, updatedItem);
             }

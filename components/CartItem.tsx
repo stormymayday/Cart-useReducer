@@ -10,7 +10,7 @@ interface CartItemProps {
 }
 
 const CartItem = ({ cartItem }: CartItemProps) => {
-    const { removeItem, increaseAmount } = useAppContext();
+    const { removeItem, increaseAmount, decreaseAmount } = useAppContext();
 
     const { id, img, title, price, amount } = cartItem;
 
@@ -38,7 +38,7 @@ const CartItem = ({ cartItem }: CartItemProps) => {
                 {/* decrease amount */}
                 <button
                     className="amount-btn"
-                    onClick={() => console.log("decrease")}
+                    onClick={() => decreaseAmount(id)}
                 >
                     <FaChevronDown className="amount-icon" />
                 </button>
