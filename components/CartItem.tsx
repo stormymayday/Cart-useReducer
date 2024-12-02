@@ -1,20 +1,26 @@
+"use client";
+
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
-import { useGlobalContext } from "./context";
-const CartItem = ({ id, img, title, price, amount }) => {
-    const { removeItem, increaseAmount, decreaseAmount } = useGlobalContext();
+import { CartItemType } from "@/types";
+import Image from "next/image";
+
+interface CartItemProps {
+    cartItem: CartItemType;
+}
+
+const CartItem = ({ cartItem }: CartItemProps) => {
+    const { img, title, price, amount } = cartItem;
 
     return (
         <article className="cart-item">
-            <img src={img} alt={title} />
+            <Image src={img} alt={title} width={80} height={80} />
             <div>
                 <h5>{title}</h5>
                 <span className="item-price">${price}</span>
                 {/* remove button */}
                 <button
                     className="remove-btn"
-                    onClick={() => {
-                        removeItem(id);
-                    }}
+                    onClick={() => console.log("remove")}
                 >
                     remove
                 </button>
@@ -23,9 +29,7 @@ const CartItem = ({ id, img, title, price, amount }) => {
                 {/* increase amount */}
                 <button
                     className="amount-btn"
-                    onClick={() => {
-                        increaseAmount(id);
-                    }}
+                    onClick={() => console.log("increase")}
                 >
                     <FaChevronUp className="amount-icon" />
                 </button>
@@ -34,9 +38,7 @@ const CartItem = ({ id, img, title, price, amount }) => {
                 {/* decrease amount */}
                 <button
                     className="amount-btn"
-                    onClick={() => {
-                        decreaseAmount(id);
-                    }}
+                    onClick={() => console.log("decrease")}
                 >
                     <FaChevronDown className="amount-icon" />
                 </button>
