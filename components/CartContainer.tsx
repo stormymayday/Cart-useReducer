@@ -5,7 +5,7 @@ import { CartItemType } from "@/utils/types";
 import { useAppContext } from "@/utils/context";
 
 const CartContainer = () => {
-    const { state, totalCost, clearCart } = useAppContext();
+    const { state, totalCost, clearCart, fetchItems } = useAppContext();
 
     // Converting Map into an Array
     const cartArray: CartItemType[] = [...Array.from(state.cart.values())];
@@ -17,6 +17,15 @@ const CartContainer = () => {
                 <header>
                     <h2>your bag</h2>
                     <h4 className="empty-cart">is currently empty</h4>
+                    <div className="flex justify-center items-center mt-10">
+                        <button
+                            type="button"
+                            className="btn"
+                            onClick={fetchItems}
+                        >
+                            fetch items
+                        </button>
+                    </div>
                 </header>
             </section>
         );

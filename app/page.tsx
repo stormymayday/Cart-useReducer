@@ -9,7 +9,7 @@ export default function Home() {
 
     if (state.loading) {
         return (
-            <main>
+            <main className="flex flex-col justify-center items-center h-screen">
                 <div className="loading"></div>
             </main>
         );
@@ -17,10 +17,8 @@ export default function Home() {
 
     if (state.isError) {
         return (
-            <main>
-                <div>
-                    <h1>{state.errorMessage}</h1>
-                </div>
+            <main className="flex flex-col justify-center items-center h-screen">
+                <h1>{state.errorMessage}</h1>
             </main>
         );
     }

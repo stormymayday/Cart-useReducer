@@ -37,6 +37,7 @@ type AppContextType = {
     decreaseAmount: (id: string) => void;
     totalNumberOfItems: number;
     totalCost: number;
+    fetchItems: () => void;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -70,6 +71,10 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
 
     const { totalNumberOfItems, totalCost } = getTotals(state.cart);
 
+    const fetchItems = () => {
+        getData();
+    };
+
     const clearCart = () => {
         dispatch({ type: CLEAR_CART });
     };
@@ -96,6 +101,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
                 decreaseAmount,
                 totalNumberOfItems,
                 totalCost,
+                fetchItems,
             }}
         >
             {children}
