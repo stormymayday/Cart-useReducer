@@ -2,14 +2,13 @@
 
 import CartItem from "@/components/CartItem";
 import { CartItemType } from "@/utils/types";
-import cartItems from "@/utils/data";
 import { useAppContext } from "@/utils/context";
 
 const CartContainer = () => {
-    const { data } = useAppContext();
-    console.log(data);
+    const { cart } = useAppContext();
 
-    const cartArray: CartItemType[] = [...cartItems];
+    // Converting Map into an Array
+    const cartArray: CartItemType[] = [...Array.from(cart.values())];
 
     if (cartArray.length === 0) {
         return (

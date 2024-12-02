@@ -7,6 +7,6 @@ export type CartItemType = {
 };
 
 export type AppStateType = {
-    data: CartItemType[];
+    cart: Map<string, CartItemType>;
     loading: boolean;
 };

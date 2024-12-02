@@ -22,7 +22,7 @@ import {
 } from "react";
 
 const initialState: AppStateType = {
-    data: [],
+    cart: new Map(cartItems.map((item) => [item.id, item])),
     loading: false,
 };
 
