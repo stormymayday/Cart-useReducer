@@ -3,13 +3,16 @@
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { CartItemType } from "@/utils/types";
 import Image from "next/image";
+import { useAppContext } from "@/utils/context";
 
 interface CartItemProps {
     cartItem: CartItemType;
 }
 
 const CartItem = ({ cartItem }: CartItemProps) => {
-    const { img, title, price, amount } = cartItem;
+    const { removeItem } = useAppContext();
+
+    const { id, img, title, price, amount } = cartItem;
 
     return (
         <article className="cart-item">
@@ -18,10 +21,7 @@ const CartItem = ({ cartItem }: CartItemProps) => {
                 <h5>{title}</h5>
                 <span className="item-price">${price}</span>
                 {/* remove button */}
-                <button
-                    className="remove-btn"
-                    onClick={() => console.log("remove")}
-                >
+                <button className="remove-btn" onClick={() => removeItem(id)}>
                     remove
                 </button>
             </div>
