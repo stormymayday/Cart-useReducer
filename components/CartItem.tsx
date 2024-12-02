@@ -10,7 +10,7 @@ interface CartItemProps {
 }
 
 const CartItem = ({ cartItem }: CartItemProps) => {
-    const { removeItem } = useAppContext();
+    const { removeItem, increaseAmount } = useAppContext();
 
     const { id, img, title, price, amount } = cartItem;
 
@@ -29,7 +29,7 @@ const CartItem = ({ cartItem }: CartItemProps) => {
                 {/* increase amount */}
                 <button
                     className="amount-btn"
-                    onClick={() => console.log("increase")}
+                    onClick={() => increaseAmount(id)}
                 >
                     <FaChevronUp className="amount-icon" />
                 </button>

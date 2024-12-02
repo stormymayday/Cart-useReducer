@@ -6,7 +6,7 @@ import {
     CLEAR_CART,
     // DECREASE,
     // DISPLAY_ITEMS,
-    // INCREASE,
+    INCREASE,
     // LOADING,
     REMOVE,
 } from "@/utils/actions";
@@ -29,6 +29,7 @@ type AppContextType = {
     state: AppStateType;
     clearCart: () => void;
     removeItem: (id: string) => void;
+    increaseAmount: (id: string) => void;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -42,11 +43,16 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
 
     const removeItem = (id: string) => {
         dispatch({ type: REMOVE, payload: { id } });
-        // console.log(id);
+    };
+
+    const increaseAmount = (id: string) => {
+        dispatch({ type: INCREASE, payload: { id } });
     };
 
     return (
-        <AppContext.Provider value={{ state, clearCart, removeItem }}>
+        <AppContext.Provider
+            value={{ state, clearCart, removeItem, increaseAmount }}
+        >
             {children}
         </AppContext.Provider>
     );
